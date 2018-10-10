@@ -1,0 +1,8 @@
+{
+  "short_name": "google-cloud-apis",
+  "name": "google-cloud-apis",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
