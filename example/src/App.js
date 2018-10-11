@@ -9,7 +9,7 @@ export default class App extends Component {
 
   componentDidMount() {
     vision({
-      key: '...',
+      key: 'AIzaSyCSLv_707zXup5yJKYlG-j5T2Dh7KxP__0',
       data: {
         requests: [
           {
