@@ -75,6 +75,50 @@ export default class App extends Component {
 }
 ```
 
+### Translation
+
+```tsx
+import React, { Component } from 'react';
+
+import { translation } from 'google-cloud-apis';
+
+class TranslationSample extends Component {
+  state = {
+    res: null
+  };
+
+  componentDidMount() {
+    translation({
+      key: '...',
+      data: {
+        target: 'ko',
+        q: 'test'
+      }
+    }).then(res => {
+      this.setState({
+        res
+      });
+    });
+  }
+
+  render() {
+    const { res } = this.state;
+    if (res) {
+      return (
+        <div>
+          {res.data.data.translations.map(
+            translation => translation.translatedText
+          )}
+        </div>
+      );
+    }
+    return <div>loading...</div>;
+  }
+}
+
+export default TranslationSample;
+```
+
 ## License
 
 MIT © [pjb0811](https://github.com/pjb0811)

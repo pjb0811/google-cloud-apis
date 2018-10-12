@@ -1,3 +1,4 @@
 import vision from './vision';
+import translation from './translation';
 
-export { vision };
+export { vision, translation };
