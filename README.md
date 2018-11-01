@@ -122,6 +122,10 @@ export default TranslationSample;
 ### analytics
 
 ```tsx
+import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
+import { analytics } from 'google-cloud-apis';
+
 class AnalyticsSample extends Component {
   state = {
     res: ''
@@ -130,16 +134,16 @@ class AnalyticsSample extends Component {
   componentDidMount() {
     analytics({
       delay: 1000,
-      viewId: 'viewId',
+      viewId: 'view id',
       data: {
         dateRanges: [
           {
-            startDate: '7daysAgo',
+            startDate: 'today',
             endDate: 'today'
           }
         ],
         metrics: [{ expression: 'ga:pageviews' }],
-        dimensions: [{ name: 'ga:pageTitle' }],
+        dimensions: [{ name: 'ga:pagePath' }],
         orderBys: [
           {
             fieldName: 'ga:pageviews',
@@ -147,11 +151,18 @@ class AnalyticsSample extends Component {
           }
         ]
       }
-    }).then(res => {
-      this.setState({
-        res: JSON.stringify(res.result.reports[0].data, null, 2)
-      });
-    });
+    }).then(
+      res => {
+        this.setState({
+          res: JSON.stringify(res.result.reports[0].data, null, 2)
+        });
+      },
+      res => {
+        this.setState({
+          res
+        });
+      }
+    );
   }
 
   render() {
@@ -160,7 +171,7 @@ class AnalyticsSample extends Component {
     return (
       <div>
         <Helmet>
-          <meta name="google-signin-client_id" content="contentId" />
+          <meta name="google-signin-client_id" content="cliend_id" />
 
           <meta
             name="google-signin-scope"
