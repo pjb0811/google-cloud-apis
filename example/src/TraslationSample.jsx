@@ -12,7 +12,7 @@ class TranslationSample extends Component {
       key: 'AIzaSyCSLv_707zXup5yJKYlG-j5T2Dh7KxP__0',
       data: {
         target: 'ko',
-        q: 'test'
+        q: 'Wemakeprice,Discounts and allowances,Detergent,Laundry'
       }
     }).then(res => {
       this.setState({
