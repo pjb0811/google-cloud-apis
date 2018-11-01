@@ -14,12 +14,12 @@ class AnalyticsSample extends Component {
       data: {
         dateRanges: [
           {
-            startDate: '7daysAgo',
+            startDate: 'today',
             endDate: 'today'
           }
         ],
         metrics: [{ expression: 'ga:pageviews' }],
-        dimensions: [{ name: 'ga:pageTitle' }],
+        dimensions: [{ name: 'ga:pagePath' }],
         orderBys: [
           {
             fieldName: 'ga:pageviews',
@@ -27,11 +27,18 @@ class AnalyticsSample extends Component {
           }
         ]
       }
-    }).then(res => {
-      this.setState({
-        res: JSON.stringify(res.result.reports[0].data, null, 2)
-      });
-    });
+    }).then(
+      res => {
+        this.setState({
+          res: JSON.stringify(res.result.reports[0].data, null, 2)
+        });
+      },
+      res => {
+        this.setState({
+          res
+        });
+      }
+    );
   }
 
   render() {
