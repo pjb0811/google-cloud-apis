@@ -123,22 +123,25 @@ export default TranslationSample;
 
 ```tsx
 import React, { Component } from 'react';
-import { Helmet } from 'react-helmet';
 import { analytics } from 'google-cloud-apis';
+import { GoogleLogin } from 'react-google-login';
 
 class AnalyticsSample extends Component {
   state = {
+    button: {
+      text: 'login'
+    },
     res: ''
   };
 
   componentDidMount() {
     analytics({
       delay: 1000,
-      viewId: 'view id',
+      viewId: '...',
       data: {
         dateRanges: [
           {
-            startDate: 'today',
+            startDate: '1daysAgo',
             endDate: 'today'
           }
         ],
@@ -154,6 +157,9 @@ class AnalyticsSample extends Component {
     }).then(
       res => {
         this.setState({
+          button: {
+            text: 'sign in'
+          },
           res: JSON.stringify(res.result.reports[0].data, null, 2)
         });
       },
@@ -165,23 +171,24 @@ class AnalyticsSample extends Component {
     );
   }
 
+  responseGoogle = res => {
+    this.setState({
+      button: {
+        text: 'sign in'
+      }
+    });
+  };
+
   render() {
-    const { res } = this.state;
+    const { res, button } = this.state;
 
     return (
       <div>
-        <Helmet>
-          <meta name="google-signin-client_id" content="cliend_id" />
-
-          <meta
-            name="google-signin-scope"
-            content="https://www.googleapis.com/auth/analytics.readonly"
-          />
-
-          <script src="https://apis.google.com/js/client:platform.js" />
-        </Helmet>
-
-        <p className="g-signin2" data-onsuccess="queryReports" />
+        <GoogleLogin
+          clientId="..."
+          buttonText={button.text}
+          onSuccess={this.responseGoogle}
+        />
         <textarea
           cols="80"
           rows="20"

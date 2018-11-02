@@ -18,6 +18,6 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "react-helmet": "^5.2.0"
+    "react-google-login": "^3.2.1"
   }
 }
